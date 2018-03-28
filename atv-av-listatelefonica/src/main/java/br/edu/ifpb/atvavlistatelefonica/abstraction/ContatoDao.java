@@ -14,14 +14,14 @@ import java.util.List;
  */
 public interface ContatoDao {
 
-    public void cadastrarPedido(Contato contato);
+    public void cadastrarContato(Contato contato);
 
     public void atualizarContato(int idAtuliazacao, Contato novoEstado);
 
     public void removerContato(Contato contato);
 
-    public List<Contato> listarContatos();
-
     public List<Contato> buscarContato(String nome);
+
+    public List<Contato> listarContatos();
 
 }

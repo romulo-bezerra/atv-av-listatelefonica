@@ -1,0 +1,5 @@
+br/edu/ifpb/atvavlistatelefonica/abstraction/ContatoDao.class
+br/edu/ifpb/atvavlistatelefonica/model/Contato_.class
+br/edu/ifpb/atvavlistatelefonica/dao/ContatoDaoImpl.class
+br/edu/ifpb/atvavlistatelefonica/model/Contato.class
+br/edu/ifpb/atvavlistatelefonica/controller/ControladorContato.class

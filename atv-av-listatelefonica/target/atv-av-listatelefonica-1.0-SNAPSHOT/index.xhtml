@@ -30,24 +30,25 @@
             <br/>
             <div class="row">
                 <div class="col l8 offset-l2 offset-m2 offset-s2">
-                    <h4>Contatos</h4>
+                    <center><h4>Agenda de Contatos</h4><br/></center>
+                    <h5>Cadastre Contatos</h5>
                     <h:form>
                         <div class="row">
                             <div class="col l10 m8 s8">
                                 <div class='input-field'>
-                                    <input class='validate' jsf:value="#{controladorCliente.cliente.email}" 
+                                    <input class='validate' jsf:value="#{controladorContato.contato.nome}" 
                                            type='text' name='nome' id='nome'/>
                                     <label for='nome'>Nome</label>
                                 </div>
                                 <div class='input-field'>
-                                    <input class='validate' jsf:value="#{controladorCliente.cliente.email}" 
+                                    <input class='validate' jsf:value="#{controladorContato.contato.numero}" 
                                            type='tel' name='telefone' id='telefone' />
                                     <label for='telefone'>Telefone</label>
                                 </div>
                             </div>
                             <div class="col l2">
                                 <h:commandLink class="btn-floating btn-large waves-effect waves-light green"
-                                               action="#{controladorDeCarrinho.add()}">
+                                               action="#{controladorContato.cadastrarContato()}">
                                     <i class="material-icons">add</i>
                                 </h:commandLink>
                             </div>
@@ -56,43 +57,66 @@
 
                     <h:messages errorClass="red-text"/>
 
-                    <h5>Lista de Contatos</h5>
+                    <h5>Busque Contatos</h5>
                     <div class="row">
                         <h:form>
                             <div class='col l8 m10 s10 input-field'>
-                                <input class='validate' jsf:value="#{controladorCliente.cliente.email}" 
+                                <input class='validate' jsf:value="#{controladorContato.nomeBusca}" 
                                        type='text' name='busca' id='busca'/>
                                 <label for='busca'>Digite sua busca</label>
                             </div>
-                        </h:form>
-                        <h:form>
                             <div id="btn-search" class="col l10 m10 s10 ">
-                                <h:commandLink action="#{controladorDeCarrinho.remove(produto)}"
+                                <h:commandLink action="#{controladorContato.buscarContato()}"
                                                class="btn-floating btn-flat waves-effect waves-light grey">
                                     <i class="material-icons">search</i>
                                 </h:commandLink>
                             </div>
                         </h:form>
                     </div>
-
-                    <h:dataTable value="#{controladorDeCarrinho.todosOsProdutos()}" var="produto">
+                    
+                    <label class="blue-text">Resultado da Busca:</label>
+                    <h:dataTable id="contatoBuscado" value="#{controladorContato.nomesBusca}" var="contatoBuscado">
                         <h:column>
                             <div class="row">
                                 <div class="col l4 m4 s6">
-                                    #{produto.descricao}    
+                                    #{contatoBuscado.nome}    
                                 </div>
                                 <div class="col l4 m4 s6">
-                                    R$ #{produto.preco}
+                                    #{contatoBuscado.numero}
                                 </div>
                                 <div class="col l4">
                                     <h:form>
-                                        <h:commandLink action="#{controladorDeCarrinho.remove(produto)}"
+                                        <h:commandLink action="#{controladorContato.atualizarContato(102, contato)}"
                                                        class="btn-floating btn-flat waves-effect waves-light blue">
                                             <i class="material-icons">edit</i>
                                         </h:commandLink>
+                                        <h:commandLink id="removeContatoBuscado" action="#{controladorContato.removerContatoBusca(contatoBuscado)}"
+                                                       class="btn-floating btn-flat waves-effect waves-light red">
+                                            <i class="material-icons">clear</i>
+                                        </h:commandLink>
                                     </h:form>
+                                </div>
+                            </div>  
+                        </h:column>
+                    </h:dataTable>
+                    
+                    <h5>Lista de Contatos</h5>
+                    <h:dataTable value="#{controladorContato.listarContatos()}" var="contato">
+                        <h:column>
+                            <div class="row">
+                                <div class="col l4 m4 s6">
+                                    #{contato.nome}    
+                                </div>
+                                <div class="col l4 m4 s6">
+                                    #{contato.numero}
+                                </div>
+                                <div class="col l4">
                                     <h:form>
-                                        <h:commandLink action="#{controladorDeCarrinho.remove(produto)}"
+                                        <h:commandLink action="#{controladorContato.atualizarContato(102, contato)}"
+                                                       class="btn-floating btn-flat waves-effect waves-light blue">
+                                            <i class="material-icons">edit</i>
+                                        </h:commandLink>
+                                        <h:commandLink id="removeContato" action="#{controladorContato.removerContato(contato)}"
                                                        class="btn-floating btn-flat waves-effect waves-light red">
                                             <i class="material-icons">clear</i>
                                         </h:commandLink>

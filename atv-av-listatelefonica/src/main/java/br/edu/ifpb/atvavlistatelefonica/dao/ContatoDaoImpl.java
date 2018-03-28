@@ -26,7 +26,7 @@ public class ContatoDaoImpl implements ContatoDao {
     private EntityManager entityManager;
 
     @Override
-    public void cadastrarPedido(Contato contato) {
+    public void cadastrarContato(Contato contato) {
         entityManager.persist(contato);
     }
 
@@ -39,7 +39,8 @@ public class ContatoDaoImpl implements ContatoDao {
 
     @Override
     public void removerContato(Contato contato) {
-        entityManager.remove(contato);
+        Contato contatoRemove = entityManager.find(Contato.class, contato.getId());
+        entityManager.remove(contatoRemove);
     }
 
     @Override
