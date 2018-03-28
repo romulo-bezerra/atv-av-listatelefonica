@@ -8,6 +8,7 @@ package br.edu.ifpb.atvavlistatelefonica.dao;
 import br.edu.ifpb.atvavlistatelefonica.abstraction.ContatoDao;
 import br.edu.ifpb.atvavlistatelefonica.model.Contato;
 import java.util.List;
+import java.util.Optional;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -45,7 +46,11 @@ public class ContatoDaoImpl implements ContatoDao {
 
     @Override
     public List<Contato> listarContatos() {
-        String querySql = "SELECT c FROM Contato c";
+        String querySql = "SELECT c FROM Contato c ORDER BY c.nome ASC";
+//        String querySql = "SELECT c.id, c.nome, c.numero \n"
+//                + "FROM Contato c \n"
+//                + "GROUP BY SUBSTRing(c.nome, 1, 1), c.nome, c.numero, c.id \n"
+//                + "ORDER BY c.nome";
         TypedQuery<Contato> query = entityManager
                 .createQuery(querySql, Contato.class);
         return query.getResultList();
@@ -54,7 +59,7 @@ public class ContatoDaoImpl implements ContatoDao {
     @Override
     public List<Contato> buscarContato(String nome) {
         String querySql = "SELECT c FROM Contato c "
-                + "WHERE c.nome= :nome";
+                + "WHERE c.nome= :nome ORDER BY c.nome ASC";
         TypedQuery<Contato> query = entityManager
                 .createQuery(querySql, Contato.class);
         query.setParameter("nome", nome);

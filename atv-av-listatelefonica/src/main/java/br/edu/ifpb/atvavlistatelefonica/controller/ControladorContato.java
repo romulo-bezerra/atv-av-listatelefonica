@@ -7,6 +7,7 @@ package br.edu.ifpb.atvavlistatelefonica.controller;
 
 import br.edu.ifpb.atvavlistatelefonica.abstraction.ContatoDao;
 import br.edu.ifpb.atvavlistatelefonica.model.Contato;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -19,7 +20,7 @@ import javax.inject.Named;
  */
 @Named
 @RequestScoped
-public class ControladorContato {
+public class ControladorContato implements Serializable {
 
     @Inject
     private ContatoDao contatoDao;
@@ -33,13 +34,17 @@ public class ControladorContato {
     }
 
     public String cadastrarContato() {
-        contatoDao.cadastrarContato(contato);
+        if (contato.getId() != 0) {
+            contatoDao.atualizarContato(contato.getId(), contato);
+        } else {
+            contatoDao.cadastrarContato(contato);
+        }
         contato = new Contato();
         return null;
     }
 
-    public String atualizarContato(int idAtualizacao, Contato novoEstado) {
-        contatoDao.atualizarContato(idAtualizacao, novoEstado);
+    public String atualizarContato(Contato novoEstado) {
+        this.contato = novoEstado;
         return null;
     }
 
@@ -49,7 +54,7 @@ public class ControladorContato {
     }
 
     public String buscarContato() {
-        nomesBusca = contatoDao.buscarContato(nomeBusca); 
+        nomesBusca = contatoDao.buscarContato(nomeBusca);
         this.nomeBusca = null;
         return null;
     }
@@ -81,5 +86,5 @@ public class ControladorContato {
     public void setNomesBusca(List<Contato> nomesBusca) {
         this.nomesBusca = nomesBusca;
     }
-    
+
 }

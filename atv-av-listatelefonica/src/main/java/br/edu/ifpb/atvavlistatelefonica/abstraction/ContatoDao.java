@@ -23,5 +23,5 @@ public interface ContatoDao {
     public List<Contato> buscarContato(String nome);
 
     public List<Contato> listarContatos();
-
+    
 }
