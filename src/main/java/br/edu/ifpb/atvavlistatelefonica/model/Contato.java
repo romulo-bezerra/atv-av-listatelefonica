@@ -23,7 +23,7 @@ public class Contato implements Serializable {
     private int id;
     @Column(length = 100, nullable = false)
     private String nome;
-    @Column(length = 19, nullable = false, unique = true)
+    @Column(length = 18, nullable = false, unique = true)
     private String numero;
 
     public Contato() {
