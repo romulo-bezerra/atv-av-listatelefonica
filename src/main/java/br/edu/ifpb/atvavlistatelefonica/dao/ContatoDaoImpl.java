@@ -45,10 +45,9 @@ public class ContatoDaoImpl implements ContatoDao {
 
     @Override
     public List<Contato> listarContatos() {
-        String querySql = "SELECT c "
-                + "FROM Contato c "
-                + "GROUP BY SUBSTRING(c.nome, 1, 1), c.nome, c.numero, c.id "
-                + "ORDER BY c.nome";
+        String querySql = "SELECT c FROM Contato c "
+                + "GROUP BY SUBSTRING(c.nome, 1, 1), c "
+                + "ORDER BY SUBSTRING(c.nome, 1, 1)";
         TypedQuery<Contato> query = entityManager
                 .createQuery(querySql, Contato.class);
         return query.getResultList();
