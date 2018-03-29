@@ -1,5 +1,4 @@
-# Atividade Avaliativa
-## * ``Docker e Java Server Faces``
+# Atividade Avaliativa - ``Docker e Java Server Faces``
 
 ### Aluno: ``Rômulo Soares Bezerra``
 
