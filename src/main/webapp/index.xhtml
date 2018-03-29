@@ -11,8 +11,6 @@
         <link href="css/material-icons.css" rel="stylesheet"/>
         <!--Import materialize.css-->
         <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-        <!--Import custom-css.css-->
-        <link type="text/css" rel="stylesheet" href="css/custom-css.css"  media="screen,projection"/>
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>Contatos</title>
@@ -37,16 +35,19 @@
                     <h:form>
                         <div class="row">
                             <div class="col l10 m8 s8">
+                                <!--recebe o id do contato para atualização-->
                                 <h:inputHidden value="#{controladorContato.contato.id}"/>
                                 <div class='input-field'>
-                                    <input class='validate' jsf:value="#{controladorContato.contato.nome}" 
-                                           type='text' name='nome' id='nome'/>
+                                    <h:inputText rendererType="text" maxlength="100" required="true"
+                                                 requiredMessage="Preencha o campo nome" 
+                                                 value="#{controladorContato.contato.nome}"/>
                                     <label for='nome'>Nome</label>
                                 </div>
                                 <div class='input-field'>
-                                    <input class='validate' jsf:value="#{controladorContato.contato.numero}" 
-                                           type='tel' name='telefone' id='telefone' />
-                                    <label for='telefone'>Telefone</label>
+                                    <h:inputText rendererType="text" maxlength="19" required="true"
+                                                 requiredMessage="Preencha o campo telefone" 
+                                                 value="#{controladorContato.contato.numero}"/>
+                                    <label for='nome'>Telefone</label>
                                 </div>
                             </div>
                             <div class="col l2">
@@ -57,25 +58,11 @@
                             </div>
                         </div>
                     </h:form>
-
+                    
                     <h:messages errorClass="red-text"/>
-
+                    
                     <h5>Busque Contatos</h5>
                     <h:form>
-<!--                        <div class="row">
-                            <div class='col l10 m10 s10 input-field'>
-                                <input class='validate' jsf:value="#{controladorContato.nomeBusca}" 
-                                       type='text' name='busca' id='busca'/>
-                                <label for='busca'>Digite sua busca</label>
-                            </div>
-                            <div id="btn-search" class="col l12 m10 s10 ">
-                                <h:commandLink action="#{controladorContato.buscar()}"
-                                               class="btn-floating btn-large waves-effect waves-light grey">
-                                    <i class="material-icons">search</i>
-                                </h:commandLink>
-                            </div>
-                        </div>-->
-                        
                         <div class="row">
                             <div class="col l10 m8 s8">
                                 <div class='input-field'>
@@ -92,54 +79,51 @@
                             </div>
                         </div>
                     </h:form>
-
-                    <div id="listaBuscaContato">
-                        <label class="blue-text">Resultado da Busca:</label>
-                        <h:dataTable value="#{controladorContato.listarContatosBusca()}" var="contato">
-                            <h:column>
-                                <div class="row">
-                                    <div class="col l4 m4 s6">
-                                        #{contato.nome}    
-                                    </div>
-                                    <div class="col l4 m4 s6">
-                                        #{contato.numero}
-                                    </div>
-                                </div>  
-                            </h:column>
-                        </h:dataTable>
-                    </div>
-
-                    <div id="listaContatos">
-                        <h5>Lista de Contatos</h5>
-                        <h:dataTable value="#{controladorContato.listarContatos()}" var="contato">
-                            <h:column>
-                                <div class="row">
-                                    <div class="col l4 m4 s3">
-                                        #{contato.nome}    
-                                    </div>
-                                    <div class="col l4 m4 s3">
-                                        #{contato.numero}
-                                    </div>
-                                    <div class="col l4 m4 s2">
-                                        <h:form>
-                                            <div class="col l3 m6 s2">
-                                                <h:commandLink action="#{controladorContato.atualizarContato(contato)}"
-                                                               class="btn-floating btn-flat waves-effect waves-light blue">
-                                                    <i class="material-icons">edit</i>
-                                                </h:commandLink>
-                                            </div>
-                                            <div class="col l3 m6 s2">
-                                                <h:commandLink id="removeContato" action="#{controladorContato.removerContato(contato)}"
-                                                               class="btn-floating btn-flat waves-effect waves-light red">
-                                                    <i class="material-icons">clear</i>
-                                                </h:commandLink>
-                                            </div>
-                                        </h:form>
-                                    </div>
+                    
+                    <label class="blue-text">Resultado da Busca:</label>
+                    <h:dataTable value="#{controladorContato.listarContatosBusca()}" var="contato">
+                        <h:column>
+                            <div class="row">
+                                <div class="col l4 m4 s6">
+                                    #{contato.nome}    
                                 </div>
-                            </h:column>
-                        </h:dataTable>
-                    </div>
+                                <div class="col l4 m4 s6">
+                                    #{contato.numero}
+                                </div>
+                            </div>  
+                        </h:column>
+                    </h:dataTable>
+                    
+                    <h5>Lista de Contatos</h5>
+                    <h:dataTable value="#{controladorContato.listarContatos()}" var="contato">
+                        <h:column>
+                            <div class="row">
+                                <div class="col l4 m4 s3">
+                                    #{contato.nome}    
+                                </div>
+                                <div class="col l4 m4 s3">
+                                    #{contato.numero}
+                                </div>
+                                <div class="col l4 m4 s2">
+                                    <h:form>
+                                        <div class="col l3 m6 s2">
+                                            <h:commandLink action="#{controladorContato.atualizarContato(contato)}"
+                                                           class="btn-floating btn-flat waves-effect waves-light blue">
+                                                <i class="material-icons">edit</i>
+                                            </h:commandLink>
+                                        </div>
+                                        <div class="col l3 m6 s2">
+                                            <h:commandLink id="removeContato" action="#{controladorContato.removerContato(contato)}"
+                                                           class="btn-floating btn-flat waves-effect waves-light red">
+                                                <i class="material-icons">clear</i>
+                                            </h:commandLink>
+                                        </div>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </h:column>
+                    </h:dataTable>
+                    
                 </div>
             </div>
         </div>

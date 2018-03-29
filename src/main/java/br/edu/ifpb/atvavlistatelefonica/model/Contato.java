@@ -21,9 +21,9 @@ public class Contato implements Serializable {
     @Id
     @GeneratedValue
     private int id;
-    @Column(length = 50, nullable = false)
+    @Column(length = 100, nullable = false)
     private String nome;
-    @Column(length = 16, nullable = false, unique = true)
+    @Column(length = 19, nullable = false, unique = true)
     private String numero;
 
     public Contato() {

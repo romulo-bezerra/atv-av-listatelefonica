@@ -49,7 +49,6 @@ public class ControladorContato {
     }
 
     public String removerContato(Contato contato) {
-        System.out.println("CONTATO PARA REMOVER DA BUSCA: " + contato);
         contatoDao.removerContato(contato);
         return null;
     }

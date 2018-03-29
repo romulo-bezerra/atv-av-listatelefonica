@@ -42,14 +42,13 @@ public class ContatoDaoImpl implements ContatoDao {
         Contato contatoRemove = entityManager.find(Contato.class, contato.getId());
         entityManager.remove(contatoRemove);
     }
-    
+
     @Override
     public List<Contato> listarContatos() {
-        String querySql = "SELECT c FROM Contato c ORDER BY c.nome ASC";
-//        String querySql = "SELECT c.id, c.nome, c.numero \n"
-//                + "FROM Contato c \n"
-//                + "GROUP BY SUBSTRing(c.nome, 1, 1), c.nome, c.numero, c.id \n"
-//                + "ORDER BY c.nome";
+        String querySql = "SELECT c "
+                + "FROM Contato c "
+                + "GROUP BY SUBSTRING(c.nome, 1, 1), c.nome, c.numero, c.id "
+                + "ORDER BY c.nome";
         TypedQuery<Contato> query = entityManager
                 .createQuery(querySql, Contato.class);
         return query.getResultList();

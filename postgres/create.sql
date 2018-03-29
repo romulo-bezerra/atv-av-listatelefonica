@@ -1,5 +1,5 @@
 CREATE TABLE contato(
 	id integer PRIMARY KEY, 
-	nome VARCHAR(255),
-	numero VARCHAR(255)
+	nome VARCHAR(100),
+	numero VARCHAR(19)
 );
