@@ -8,7 +8,6 @@ package br.edu.ifpb.atvavlistatelefonica.dao;
 import br.edu.ifpb.atvavlistatelefonica.abstraction.ContatoDao;
 import br.edu.ifpb.atvavlistatelefonica.model.Contato;
 import java.util.List;
-import java.util.Optional;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -43,7 +42,7 @@ public class ContatoDaoImpl implements ContatoDao {
         Contato contatoRemove = entityManager.find(Contato.class, contato.getId());
         entityManager.remove(contatoRemove);
     }
-
+    
     @Override
     public List<Contato> listarContatos() {
         String querySql = "SELECT c FROM Contato c ORDER BY c.nome ASC";

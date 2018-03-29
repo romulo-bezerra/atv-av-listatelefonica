@@ -7,8 +7,6 @@ package br.edu.ifpb.atvavlistatelefonica.controller;
 
 import br.edu.ifpb.atvavlistatelefonica.abstraction.ContatoDao;
 import br.edu.ifpb.atvavlistatelefonica.model.Contato;
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -20,19 +18,17 @@ import javax.inject.Named;
  */
 @Named
 @RequestScoped
-public class ControladorContato implements Serializable {
+public class ControladorContato {
 
     @Inject
     private ContatoDao contatoDao;
     private Contato contato;
     private String nomeBusca;
-    private List<Contato> nomesBusca;
 
     public ControladorContato() {
         this.contato = new Contato();
-        this.nomesBusca = new ArrayList<>();
     }
-
+    
     public String cadastrarContato() {
         if (contato.getId() != 0) {
             contatoDao.atualizarContato(contato.getId(), contato);
@@ -43,24 +39,27 @@ public class ControladorContato implements Serializable {
         return null;
     }
 
+    public String buscar() {
+        return null;
+    }
+    
     public String atualizarContato(Contato novoEstado) {
         this.contato = novoEstado;
         return null;
     }
 
     public String removerContato(Contato contato) {
+        System.out.println("CONTATO PARA REMOVER DA BUSCA: " + contato);
         contatoDao.removerContato(contato);
         return null;
     }
-
-    public String buscarContato() {
-        nomesBusca = contatoDao.buscarContato(nomeBusca);
-        this.nomeBusca = null;
-        return null;
-    }
-
+    
     public List<Contato> listarContatos() {
         return contatoDao.listarContatos();
+    }
+    
+    public List<Contato> listarContatosBusca() {
+        return contatoDao.buscarContato(nomeBusca);
     }
 
     public Contato getContato() {
@@ -70,21 +69,13 @@ public class ControladorContato implements Serializable {
     public void setContato(Contato contato) {
         this.contato = contato;
     }
-
+    
     public String getNomeBusca() {
         return nomeBusca;
     }
 
     public void setNomeBusca(String nomeBusca) {
         this.nomeBusca = nomeBusca;
-    }
-
-    public List<Contato> getNomesBusca() {
-        return nomesBusca;
-    }
-
-    public void setNomesBusca(List<Contato> nomesBusca) {
-        this.nomesBusca = nomesBusca;
     }
 
 }

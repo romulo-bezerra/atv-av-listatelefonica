@@ -27,7 +27,8 @@ public class Contato implements Serializable {
 
     }
 
-    public Contato(String nome, String numero) {
+    public Contato(int id, String nome, String numero) {
+        this.id = id;
         this.nome = nome;
         this.numero = numero;
     }
